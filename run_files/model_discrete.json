@@ -1,0 +1,261 @@
+{
+  "type": "floris_input",
+  "name": "mittal_gradient_free",
+  "description": "Input file for Mittal gradient free number of turbines",
+  "floris_version": "v2.0.0",
+  "logging": {
+    "console": {
+      "enable": true,
+      "level": "INFO"
+    },
+    "file": {
+      "enable": false,
+      "level": "INFO"
+    }
+  },
+  "farm": {
+    "type": "farm",
+    "name": "nturbs_opt",
+    "description": "Optimize the number of wind turbines",
+    "properties": {
+      "wind_speed": [
+        8.0
+      ],
+      "wind_direction": [
+        270
+      ],
+      "turbulence_intensity": [
+        0.06
+      ],
+      "wind_shear": 0.12,
+      "__comment__": "specified_wind_height of -1 uses the first turbine's hub height; After initialization, specified_wind_height is a free parameter.",
+      "specified_wind_height": -1,
+      "wind_veer": 0.0,
+      "air_density": 1.225,
+      "layout_x": [
+        0.0, 600, 1200, 1800, 2400, 3000
+      ],
+      "layout_y": [
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+      ],
+      "wind_x": [
+        0
+      ],
+      "wind_y": [
+        0
+      ],
+      "turbine_effect": [
+        1.0,1.0,1.0,1.0,1.0,1.0
+      ]
+    }
+  },
+  "turbine": {
+    "type": "turbine",
+    "name": "vestas_850kw",
+    "description": "Vestas 850kW",
+    "properties": {
+      "use_points_on_perimeter": false,
+      "rotor_diameter": 117.8,
+      "hub_height": 88.0,
+      "blade_count": 3,
+      "pP": 1.88,
+      "pT": 1.88,
+      "generator_efficiency": 1.0,
+      "power_thrust_table": {
+        "power": [
+          0.05,
+          0.107505187,
+          0.266432492,
+          0.361366981,
+          0.411011467,
+          0.437455945,
+          0.45022894,
+          0.456897044,
+          0.459942317,
+          0.461616131,
+          0.462535865,
+          0.460486872,
+          0.459229395,
+          0.444919913,
+          0.413358199,
+          0.371631559,
+          0.323536723,
+          0.281393087,
+          0.246262316,
+          0.216744328,
+          0.19176151,
+          0.170475284,
+          0.152226469,
+          0.136492055,
+          0.122853483,
+          0.110973096,
+          0.100576469,
+          0.091439014,
+          0.08337573,
+          0.076233299,
+          0.069883932,
+          0.064220542,
+          0.059152935,
+          0.054604782,
+          0.050511195,
+          0.046816775,
+          0.04347403,
+          0.04044209,
+          0.037610286,
+          0.034453066,
+          0.031039586,
+          0.027704511,
+          0.024674821,
+          0.02197923,
+          0.019514782,
+          0.017288499,
+          0.015274894,
+          0.013472875 
+        ],
+        "thrust": [
+          0.827,
+          0.827,
+          0.826,
+          0.817,
+          0.808,
+          0.8,
+          0.794,
+          0.791,
+          0.789,
+          0.786,
+          0.77,
+          0.741,
+          0.698,
+          0.647,
+          0.593,
+          0.539,
+          0.485,
+          0.433,
+          0.383,
+          0.337,
+          0.296,
+          0.26,
+          0.229,
+          0.203,
+          0.182,
+          0.163,
+          0.148,
+          0.134,
+          0.123,
+          0.113,
+          0.105,
+          0.098,
+          0.092,
+          0.084,
+          0.082,
+          0.079,
+          0.073,
+          0.066,
+          0.059,
+          0.053,
+          0.048,
+          0.043,
+          0.039,
+          0.035,
+          0.031,
+          0.029,
+          0.026,
+          0.023
+        ],
+        "wind_speed": [
+          0,
+          3,
+          3.5,
+          4,
+          4.5,
+          5,
+          5.5,
+          6,
+          6.5,
+          7,
+          7.5,
+          8,
+          8.5,
+          9,
+          9.5,
+          10,
+          10.5,
+          11,
+          11.5,
+          12,
+          12.5,
+          13,
+          13.5,
+          14,
+          14.5,
+          15,
+          15.5,
+          16,
+          16.5,
+          17,
+          17.5,
+          18,
+          18.5,
+          19,
+          19.5,
+          20,
+          20.5,
+          21,
+          21.5,
+          22,
+          22.5,
+          23,
+          23.5,
+          24,
+          24.5,
+          25,
+          25.5,
+          26
+        ]
+      },
+      "blade_pitch": 0.0,
+      "yaw_angle": 0.0,
+      "tilt_angle": 0.0,
+      "TSR": 8.0,
+      "ngrid": 3,
+      "rloc": 0.5
+    }
+  },
+  "wake": {
+    "type": "wake",
+    "name": "wake_default",
+    "description": "wake",
+    "properties": {
+      "velocity_model": "gauss_legacy",
+      "turbulence_model": "crespo_hernandez",
+      "deflection_model": "gauss",
+      "combination_model": "sosfs",
+      "parameters": {
+        "wake_velocity_parameters": {
+          "gauss_legacy": {
+            "ka": 0.38,
+            "kb": 0.004,
+            "eps_gain": 0.2,
+            "calculate_VW_velocities": true,
+            "use_yaw_added_recovery": true
+          }
+        },
+        "wake_deflection_parameters": {
+          "gauss": {
+            "dm": 1.0,
+            "eps_gain": 0.2,
+            "use_secondary_steering":true
+          }
+        },
+        "wake_turbulence_parameters": {
+          "crespo_hernandez": {
+            "initial": 0.1,
+            "constant": 0.1,
+            "ai": 0.8,
+            "downstream": -0.55
+          }
+        }
+    }
+  }
+}
+}
