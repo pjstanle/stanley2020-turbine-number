@@ -87,7 +87,7 @@ if __name__ == "__main__":
     by = np.append(by,by[0])
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(1800,600,"objective: AEP\nAEP: 731 GWh\nCOE: 27.40 $/MWh\nprofit: $1.90 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
+    plt.text(1800,600,"objective: AEP\nAEP: 731 GWh\nCOE: 27.38 $/MWh\nprofit: $1.92 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
 
 
 
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     by = np.append(by,by[0])
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(1800,600,"objective: COE\nAEP: 465 GWh\nCOE: 20.45 $/MWh\nprofit: $4.44 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
+    plt.text(1800,600,"objective: COE\nAEP: 464 GWh\nCOE: 20.46 $/MWh\nprofit: $4.43 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
 
 
     plt.subplot(313)
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     by = np.append(by,by[0])
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(1800,600,"objective: profit\nAEP: 654 GWh\nCOE: 21.68 $/MWh\nprofit: $5.44 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
+    plt.text(1800,600,"objective: profit\nAEP: 654 GWh\nCOE: 21.69 $/MWh\nprofit: $5.44 million", horizontalalignment="left",verticalalignment="top",fontsize=8)
 
     plt.subplots_adjust(hspace=0.05,top=0.99,bottom=0.01,left=0.01,right=0.99)
 

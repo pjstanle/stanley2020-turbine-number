@@ -55,7 +55,6 @@ def AEP_obj(x):
 
     turbine_exists = x[:]
 
-    function_calls += 1
     layout_x, layout_y = get_turbine_locs(turbine_exists)
 
     if len(layout_x) > 1:
@@ -70,6 +69,7 @@ def AEP_obj(x):
         AEP = 0.0
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         AEP = AEP/1E11
@@ -94,7 +94,6 @@ def COE_obj(x):
 
     turbine_exists = x[:]
 
-    function_calls += 1
     layout_x, layout_y = get_turbine_locs(turbine_exists)
 
     spacing = calc_spacing(layout_x,layout_y)
@@ -108,6 +107,7 @@ def COE_obj(x):
         COE = 1E15
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         nturbs = len(layout_x)
@@ -139,7 +139,6 @@ def profit_obj(x):
 
     turbine_exists = x[:]
 
-    function_calls += 1
     layout_x, layout_y = get_turbine_locs(turbine_exists)
 
     if len(layout_x) > 1:
@@ -154,6 +153,7 @@ def profit_obj(x):
         return 1E6
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         nturbs = len(layout_x)
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     edges = np.array([0.0,0.0, 0.0,side, side,side, side,0.0]).reshape(4,2)
     boundary = mpl.path.Path(edges)
     grid_size = 20
-    # ppa = 30.0
+    ppa = 30.0
 
     # wind rose bigger farm unidirectional
     # ndirs = 1
@@ -289,7 +289,7 @@ if __name__ == "__main__":
     save = True
     plot = True
 
-    ppa = 100.0
+    ppa = 30.0
 
     best = 0.0
     for i in range(nruns):
@@ -327,30 +327,30 @@ if __name__ == "__main__":
             best_y = yf
 
         save_str = "profit"
-        header_str = "%s"%ppa
+        header_str = "big"
         if save:
-            file = open('final_results2/ppa/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')
+            file = open('final_results3/sweep/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')
             file.write('%s'%(opt_val) + '\n')
             file.close()
 
-            file = open('final_results2/ppa/%s_%s_x.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(xf) + '\n')
+            file = open('final_results3/sweep/%s_%s_x.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(xf)) + '\n')
             file.close()
 
-            file = open('final_results2/ppa/%s_%s_y.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(yf) + '\n')
+            file = open('final_results3/sweep/%s_%s_y.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(yf)) + '\n')
             file.close()
 
-            file = open('final_results2/ppa/%s_%s_time.txt'%(header_str,save_str), 'a')
+            file = open('final_results3/sweep/%s_%s_time.txt'%(header_str,save_str), 'a')
             file.write('%s'%(run_time) + '\n')
             file.close()
 
-            file = open('final_results2/ppa/%s_%s_calls.txt'%(header_str,save_str), 'a')
+            file = open('final_results3/sweep/%s_%s_calls.txt'%(header_str,save_str), 'a')
             file.write('%s'%(function_calls) + '\n')
             file.close()
 
-            file = open('final_results2/ppa/%s_%s_history.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(ga.solution_history) + '\n')
+            file = open('final_results3/sweep/%s_%s_history.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(ga.solution_history)) + '\n')
             file.close()
 
 

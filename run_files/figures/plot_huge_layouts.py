@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(-1500,600,"objective: AEP\nAEP: 631 GWh\nCOE: 34.82 $/MWh\nprofit: -$3.04 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
+    plt.text(-1500,600,"objective: AEP\nAEP: 628 GWh\nCOE: 34.94 $/MWh\nprofit: -$3.11 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
 
 
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(-1500,600,"objective: AEP\nAEP: 245 GWh\nCOE: 22.62 $/MWh\nprofit: $1.81 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
+    plt.text(-1500,600,"objective: COE\nAEP: 242 GWh\nCOE: 22.90 $/MWh\nprofit: $1.72 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
 
 
 
@@ -252,7 +252,7 @@ if __name__ == "__main__":
 
     plt.plot(bx,by,"--k",linewidth=0.5)
 
-    plt.text(-1500,600,"objective: COE\nAEP: 447 GWh\nCOE: 23.85 $/MWh\nprofit: $2.75 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
+    plt.text(-1500,600,"objective: profit\nAEP: 442 GWh\nCOE: 24.14 $/MWh\nprofit: $2.59 million", horizontalalignment="left",verticalalignment="top",fontsize=8,color="white")
 
 
 

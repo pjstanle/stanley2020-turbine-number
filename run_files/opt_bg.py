@@ -156,7 +156,6 @@ def AEP_obj(x):
     start = x[9]
     n_boundary = x[10]
 
-    function_calls += 1
     x_grid, y_grid = get_turbine_locs(nrows,ncols,farm_width,farm_height,shear,rotation,center_x,center_y,boundary_mult)
     x_bound,y_bound = makeBoundary(start,n_boundary)
 
@@ -175,6 +174,7 @@ def AEP_obj(x):
         AEP = -1000000.0
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         AEP = AEP/1E11
@@ -207,7 +207,6 @@ def COE_obj(x):
     start = x[9]
     n_boundary = x[10]
 
-    function_calls += 1
     x_grid, y_grid = get_turbine_locs(nrows,ncols,farm_width,farm_height,shear,rotation,center_x,center_y,boundary_mult)
     x_bound,y_bound = makeBoundary(start,n_boundary)
 
@@ -226,6 +225,7 @@ def COE_obj(x):
         COE = 1E15
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         nturbs = len(layout_x)
@@ -268,7 +268,6 @@ def profit_obj(x):
     start = x[9]
     n_boundary = x[10]
 
-    function_calls += 1
     x_grid, y_grid = get_turbine_locs(nrows,ncols,farm_width,farm_height,shear,rotation,center_x,center_y,boundary_mult)
     x_bound,y_bound = makeBoundary(start,n_boundary)
 
@@ -287,6 +286,7 @@ def profit_obj(x):
         return 1E6
 
     else:
+        function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         nturbs = len(layout_x)
@@ -323,24 +323,21 @@ if __name__ == "__main__":
     nturbs = capacity/2.5
     BOS_func = scipy.interpolate.interp1d(nturbs, BOS_cost, kind='cubic')
 
-    # 30 for small 40 for big?
-    # ppa = 40.0
-
     function_calls = 0
 
     floris_model = wfct.floris_interface.FlorisInterface("model_discrete.json")
     floris_model.set_gch(False)
 
     # small unidirectional case
-    # ndirs = 1
-    # windDirections = np.array([300.0])
-    # windSpeeds = np.ones(ndirs)*10.0
-    # windFrequencies = np.ones(ndirs)
-    # windFrequencies = windFrequencies/sum(windFrequencies)
-    # side = 800.0
-    # edges = np.array([0.0,0.0, 0.0,side, side,side, side,0.0]).reshape(4,2)
-    # boundary = mpl.path.Path(edges)
-    # ppa = 30.0
+    ndirs = 1
+    windDirections = np.array([300.0])
+    windSpeeds = np.ones(ndirs)*10.0
+    windFrequencies = np.ones(ndirs)
+    windFrequencies = windFrequencies/sum(windFrequencies)
+    side = 800.0
+    edges = np.array([0.0,0.0, 0.0,side, side,side, side,0.0]).reshape(4,2)
+    boundary = mpl.path.Path(edges)
+    ppa = 30.0
 
     # ndirs = 16
     # windDirections = np.linspace(0.0,360.-360./ndirs,ndirs)
@@ -353,20 +350,20 @@ if __name__ == "__main__":
     # ppa = 40.0
 
     # wind rose bigger farm 2
-    ndirs_interp = 17
-    windDirections_interp = np.linspace(0.0,360.,ndirs_interp)
-    windFrequencies_interp = np.array([2.0,2.0,3.0,4.0,6.0,6.0,10.0,12.0,6.0,4.0,4.0,8.0,21.0,5.0,3.0,1.0,2.0])
-    freq_func = scipy.interpolate.interp1d(windDirections_interp, windFrequencies_interp, kind='cubic')
-    ndirs = 72
-    windDirections = np.linspace(0.0,360.-360./ndirs,ndirs)
-    windSpeeds = np.ones(ndirs)*10.0
-    windFrequencies = freq_func(windDirections)
-    windFrequencies = windFrequencies/sum(windFrequencies)
-    side = 1600.0
-    edges = np.array([0.0,0.0, 0.0,side, side,side, side,0.0]).reshape(4,2)
-    boundary = mpl.path.Path(edges)
-    grid_size = 20
-    ppa = 30.0
+    # ndirs_interp = 17
+    # windDirections_interp = np.linspace(0.0,360.,ndirs_interp)
+    # windFrequencies_interp = np.array([2.0,2.0,3.0,4.0,6.0,6.0,10.0,12.0,6.0,4.0,4.0,8.0,21.0,5.0,3.0,1.0,2.0])
+    # freq_func = scipy.interpolate.interp1d(windDirections_interp, windFrequencies_interp, kind='cubic')
+    # ndirs = 72
+    # windDirections = np.linspace(0.0,360.-360./ndirs,ndirs)
+    # windSpeeds = np.ones(ndirs)*10.0
+    # windFrequencies = freq_func(windDirections)
+    # windFrequencies = windFrequencies/sum(windFrequencies)
+    # side = 1600.0
+    # edges = np.array([0.0,0.0, 0.0,side, side,side, side,0.0]).reshape(4,2)
+    # boundary = mpl.path.Path(edges)
+    # grid_size = 20
+    # ppa = 30.0
 
     # wind rose bigger farm unidirectional
     # ndirs = 1
@@ -383,7 +380,7 @@ if __name__ == "__main__":
     minSpacing = 2.0 #rotor diameters
     rotor_diameter = 117.8
 
-    nruns = 1
+    nruns = 10
 
 
     save = True
@@ -395,20 +392,21 @@ if __name__ == "__main__":
         function_calls = 0
 
         ga = GeneticAlgorithm()
+        print(ga.max_generation)
         # ga.bits = np.array([16,16,16,16,16,16,16,16,16,16,16])
         ga.bits = np.array([8,8,8,8,8,8,8,8,8,8,8])
         ga.bounds = np.array([(2.0,6.0),(2.0,6.0),(1.0,2*side),(1.0,2*side),(-np.pi,np.pi),(0.0,2.0*np.pi),(0.0,side),(0.0,side),(0.5,1.0),(0.0,side),(0,50)])
         ga.variable_type = np.array(["int","int","float","float","float","float","float","float","float","float","int"])
-        ga.population_size = 200
-        ga.max_geneneration = 1000
+        ga.population_size = 100
+        ga.max_generation = 1000
         # ga.max_geneneration = 5
         ga.objective_function = profit_obj
         ga.crossover_rate = 0.1
         ga.mutation_rate = 0.02
-        ga.convergence_iters = 50
-        ga.tol = 1E-6
+        ga.convergence_iters = 25
+        ga.tol = 1E-4
 
-        ga.optimize_ga(crossover="chunk")
+        ga.optimize_ga()
 
         opt_val = ga.optimized_function_value
         DVopt = ga.optimized_design_variables
@@ -426,30 +424,30 @@ if __name__ == "__main__":
         print("number of turbines: ", len(xf))
 
         save_str = "profit"
-        header_str = "big"
+        header_str = "small_uni"
         if save:
-            file = open('final_results2/bg/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')
+            file = open('final_results3/bg/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')
             file.write('%s'%(opt_val) + '\n')
             file.close()
 
-            file = open('final_results2/bg/%s_%s_x.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(xf) + '\n')
+            file = open('final_results3/bg/%s_%s_x.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(xf)) + '\n')
             file.close()
 
-            file = open('final_results2/bg/%s_%s_y.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(yf) + '\n')
+            file = open('final_results3/bg/%s_%s_y.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(yf)) + '\n')
             file.close()
 
-            file = open('final_results2/bg/%s_%s_time.txt'%(header_str,save_str), 'a')
+            file = open('final_results3/bg/%s_%s_time.txt'%(header_str,save_str), 'a')
             file.write('%s'%(run_time) + '\n')
             file.close()
 
-            file = open('final_results2/bg/%s_%s_calls.txt'%(header_str,save_str), 'a')
+            file = open('final_results3/bg/%s_%s_calls.txt'%(header_str,save_str), 'a')
             file.write('%s'%(function_calls) + '\n')
             file.close()
 
-            file = open('final_results2/bg/%s_%s_history.txt'%(header_str,save_str), 'a')
-            file.write('%s'%(ga.solution_history) + '\n')
+            file = open('final_results3/bg/%s_%s_history.txt'%(header_str,save_str), 'a')
+            file.write('%s'%(repr(ga.solution_history)) + '\n')
             file.close()
 
 

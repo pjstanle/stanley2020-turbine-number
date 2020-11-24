@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     
 
-    plt.figure(figsize=(6.5,2.5))
+    plt.figure(figsize=(6.5,3.0))
     plt.subplot(131)
     plt.plot(narr,AEP/1E9)
     i = np.argmax(AEP)
@@ -57,9 +57,21 @@ if __name__ == "__main__":
     plt.ylabel("AEP (GWh)",labelpad=-0.2)
     plt.xlabel("number of turbines",labelpad=-0.2)
     plt.gca().set_xticks([5,narr[i],27])
-    plt.xlim(5,27)
+    plt.xlim(5,28)
     plt.ylim(100,325)
+    
+
+    ax2 = plt.gca().twiny()
+    ax2.set_xticks([5.244482173174872,11.611205432937181,16.158864904195973,22.222410865874362,27.528013582342954])
+    ax2.set_xticklabels(["50","20","14","10","8"])
+    ax2.set_xlabel("turbine spacing (D)")
+    ax2.set_xlim(5,28)
+
+
+
     # plt.gca().set_yticks([100,200,np.ceil(mx)])
+
+    
 
     plt.subplot(132)
     COE = (cost*1E6)/(AEP)
@@ -71,7 +83,7 @@ if __name__ == "__main__":
     plt.plot([0.0,narr[i]],[mn,mn],'--',color="C0")
     plt.ylim(16,41)
     plt.gca().set_xticks([5,narr[i],27])
-    plt.xlim(5,27)
+    plt.xlim(5,28)
 
 
     p = ((AEP/1E6)*50-cost)/1E6
@@ -81,6 +93,12 @@ if __name__ == "__main__":
 
     plt.ylabel("COE ($/MWh)",labelpad=-0.2)
     plt.xlabel("number of turbines",labelpad=-0.2)
+
+    ax2 = plt.gca().twiny()
+    ax2.set_xticks([5.244482173174872,11.611205432937181,16.158864904195973,22.222410865874362,27.528013582342954])
+    ax2.set_xticklabels(["50","20","14","10","8"])
+    ax2.set_xlabel("turbine spacing (D)")
+    ax2.set_xlim(5,28)
 
     plt.subplot(133)
     # ppa = np.array([60,50,40,30])
@@ -99,14 +117,20 @@ if __name__ == "__main__":
     # plt.ylim(-2,18)
     # plt.xticks(fontsize=8,rotation=90)
     plt.gca().set_xticks([5,13,18,27])
-    plt.xlim(5,27)
+    plt.xlim(5,28)
     plt.ylim(-4,25)
+
+    ax2 = plt.gca().twiny()
+    ax2.set_xticks([5.244482173174872,11.611205432937181,16.158864904195973,22.222410865874362,27.528013582342954])
+    ax2.set_xticklabels(["50","20","14","10","8"])
+    ax2.set_xlabel("turbine spacing (D)")
+    ax2.set_xlim(5,28)
     # plt.text(15,-2.5,"15",horizontalalignment="center",verticalalignment="bottom")
     # plt.text(17,-3.9,"17",horizontalalignment="center",verticalalignment="bottom")
 
 
-    plt.subplots_adjust(left=0.1,right=0.98,wspace=0.4,bottom=0.2,top=0.95)
-    # plt.savefig("sweep1d_90.pdf", transparent=True)
+    plt.subplots_adjust(left=0.1,right=0.98,wspace=0.4,bottom=0.2,top=0.8)
+    # plt.savefig("sweep1d_twin.pdf", transparent=True)
     plt.show()
 
     # nturbs = np.arange(10)+10

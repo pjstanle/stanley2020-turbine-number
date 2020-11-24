@@ -122,7 +122,7 @@ class GeneticAlgorithm():
         difference = self.tol * 10000.0
         self.solution_history = np.zeros(self.max_generation+1)
         self.solution_history[0] = np.min(self.parent_fitness)
-
+ 
         while converged==False and ngens < self.max_generation:
             # crossover
             if crossover=="random":
@@ -163,7 +163,8 @@ class GeneticAlgorithm():
                 difference = self.solution_history[generation-self.convergence_iters] - self.solution_history[generation]
             else:
                 difference = 1000
-            # print("diff: ", difference)
+            if print_progress:
+                print("diff: ", difference)
             if abs(difference) <= self.tol:
                 converged = True
             
@@ -174,7 +175,8 @@ class GeneticAlgorithm():
             self.parent_population = self.parent_population[shuffle_order]
             self.parent_fitness = self.parent_fitness[shuffle_order]
             if print_progress==True:
-                print(self.parent_fitness[0])
+                print("generation: ", ngens)
+                print("fitness value: ", self.parent_fitness[0])
 
             generation += 1
             ngens += 1

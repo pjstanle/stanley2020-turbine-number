@@ -9,8 +9,8 @@ objectives = ["AEP","COE","profit"]
 methods = ["greedy","mosetti","sweep","bg"]
 
 for j in range(len(sizes)):
-    for k in range(len(objectives)):
-        for m in range(len(methods)):
+    for m in range(len(methods)):
+        for k in range(len(objectives)):
 
             size = sizes[j]
             objective = objectives[k]
@@ -41,9 +41,9 @@ for j in range(len(sizes)):
             print("size: ", size)
             print("objective: ", objective)
             print("method: ", method)
-            print("value: ", best)
-            print("time: ", time)
-            print("calls: ", calls)
+            # print("value: ", best)
+            # print("time: ", time)
+            # print("calls: ", calls)
             print("arg: ", arg)
             print("_______________________________________")
 
