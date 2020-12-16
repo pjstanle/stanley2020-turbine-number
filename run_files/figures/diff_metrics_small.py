@@ -41,16 +41,28 @@ if __name__ == "__main__":
     floris_model.reinitialize_flow_field(layout_array=([0],[0]))
     AEP0 = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)/1E6
 
-    xf = np.array([2.35015070e+02, 6.60582700e-15, 6.11748763e+02, 3.53540931e-16,
-       4.71104510e+02, 7.16362700e+01, 2.45149184e+02, 6.52901480e+00,
-       8.00000000e+02, 2.97985394e+02, 8.00000000e+02, 7.38779734e+02,
-       5.64400000e+02, 7.95092677e+02, 4.47924021e+02, 5.00802981e+02,
-       2.35569976e+02])
-    yf = np.array([4.78488576e+02, 4.95101210e+02, 4.22735465e+02, 2.35509528e+02,
-       2.33720751e+02, 7.19546924e+02, 3.88167204e+00, 3.12746040e-14,
-       5.64400000e+02, 7.90497941e+02, 8.00000000e+02, 8.54093525e-02,
-       8.00000000e+02, 2.29214851e+02, 5.95204956e+02, 1.31481553e-14,
-       2.39286916e+02])
+    # xf = np.array([2.35015070e+02, 6.60582700e-15, 6.11748763e+02, 3.53540931e-16,
+    #    4.71104510e+02, 7.16362700e+01, 2.45149184e+02, 6.52901480e+00,
+    #    8.00000000e+02, 2.97985394e+02, 8.00000000e+02, 7.38779734e+02,
+    #    5.64400000e+02, 7.95092677e+02, 4.47924021e+02, 5.00802981e+02,
+    #    2.35569976e+02])
+    # yf = np.array([4.78488576e+02, 4.95101210e+02, 4.22735465e+02, 2.35509528e+02,
+    #    2.33720751e+02, 7.19546924e+02, 3.88167204e+00, 3.12746040e-14,
+    #    5.64400000e+02, 7.90497941e+02, 8.00000000e+02, 8.54093525e-02,
+    #    8.00000000e+02, 2.29214851e+02, 5.95204956e+02, 1.31481553e-14,
+    #    2.39286916e+02])
+
+
+    xf = np.array([562.57270716, 554.16502215, 245.55842624, 237.15074124,
+         0.        ,   0.        ,   0.        , 250.98039216,
+       517.64705882, 784.31372549, 800.        , 800.        ,
+       800.        , 549.01960784, 282.35294118,  15.68627451])
+    yf = np.array([272.89109995, 545.7821999 , 263.12399426, 536.01509422,
+       250.98039216, 517.64705882, 784.31372549, 800.        ,
+       800.        , 800.        , 549.01960784, 282.35294118,
+        15.68627451,   0.        ,   0.        ,   0.        ])
+
+
 
     floris_model.reinitialize_flow_field(layout_array=(xf,yf))
 
@@ -67,12 +79,17 @@ if __name__ == "__main__":
 
 
 
-    xf = [  0.   ,      266.66666667 ,533.33333333,   0.   ,      533.33333333,
-            0.   ,        0. ,        266.66666667, 533.33333333, 800.        ]
+    # xf = [  0.   ,      266.66666667 ,533.33333333,   0.   ,      533.33333333,
+    #         0.   ,        0. ,        266.66666667, 533.33333333, 800.        ]
 
-    yf = [  0.   ,        0.    ,      88.88888889, 266.66666667, 355.55555556,
-            533.33333333, 800.    ,     800.    ,     800.   ,      800.        ]
-
+    # yf = [  0.   ,        0.    ,      88.88888889, 266.66666667, 355.55555556,
+    #         533.33333333, 800.    ,     800.    ,     800.   ,      800.        ]
+    xf = np.array([  0. ,        266.66666667, 711.11111111,   0.   ,      266.66666667,
+            533.33333333, 800.   ,        0.  ,       266.66666667, 533.33333333,
+            800.        ])
+    yf = np.array([  0.  ,         0.    ,       0.  ,       266.66666667 ,355.55555556,
+            444.44444444, 533.33333333, 622.22222222, 711.11111111, 800.,
+            800.        ])
     floris_model.reinitialize_flow_field(layout_array=(xf,yf))
 
     nturbs_COE = len(xf)
@@ -88,13 +105,21 @@ if __name__ == "__main__":
 
 
 
-    xf = [  0. ,        266.66666667, 622.22222222 ,  0. ,        355.55555556,
-        711.11111111,  88.88888889 ,444.44444444, 800.    ,     177.77777778,
-        533.33333333, 800.        ]
+    # xf = [  0. ,        266.66666667, 622.22222222 ,  0. ,        355.55555556,
+    #     711.11111111,  88.88888889 ,444.44444444, 800.    ,     177.77777778,
+    #     533.33333333, 800.        ]
 
-    yf = [  0. ,          0.   ,        0.   ,      266.66666667, 266.66666667,
-        266.66666667 ,533.33333333 ,533.33333333 ,533.33333333 ,800.,
-        800.      ,   800.        ]
+    # yf = [  0. ,          0.   ,        0.   ,      266.66666667, 266.66666667,
+    #     266.66666667 ,533.33333333 ,533.33333333 ,533.33333333 ,800.,
+    #     800.      ,   800.        ]
+    xf = np.array([507.0005753 , 800.        , 472.07504191,   5.98993809,
+       237.05594737, 628.20600253,   1.68871491, 329.00857681,
+       271.2310964 ,  16.94695977, 208.91332128, 564.50410731,
+       800.        ])
+    yf = np.array([2.70444765e+02, 7.99987880e+02, 1.62869968e-14, 7.42217142e+02,
+       1.65518265e+01, 5.35111322e+02, 2.70374890e+01, 8.00000000e+02,
+       3.02437754e+02, 3.52699159e+02, 5.34819999e+02, 7.92984380e+02,
+       3.32728195e+02])
 
     floris_model.reinitialize_flow_field(layout_array=(xf,yf))
 
@@ -148,18 +173,17 @@ if __name__ == "__main__":
         for rect in rects:
             height = rect.get_height()
             x = rect.get_x() + width/2.0
-            if labels[i] == "21.86":
-                plt.text(x,height-0.01,"21.86",verticalalignment="top",horizontalalignment="center",fontsize=6)
-            elif labels[i] == "-2.16":
-                plt.text(x,height-0.01,"-2.16",verticalalignment="top",horizontalalignment="center",fontsize=6)
+            if labels[i] == "21.84":
+                plt.text(x,height-0.01,"21.84",verticalalignment="top",horizontalalignment="center",fontsize=6)
+            elif labels[i] == "1.88":
+                plt.text(x,height-0.01,"1.88",verticalalignment="top",horizontalalignment="center",fontsize=6)
             else:   
                 plt.text(x,height+0.01,labels[i],verticalalignment="bottom",horizontalalignment="center",fontsize=6)
             i += 1
             
-
-    AEP_arr = np.array([str(int(AEP_AEP/1E3)), str(np.round(COE_AEP,2)), str(np.round(profit_AEP/1E6,2)), str(int(nturbs_AEP)), str(np.round(cost_AEP/1E6,2)), str(np.round(spacing_AEP,2)), str(np.round(wake_loss_AEP*100,2))])
-    COE_arr = np.array([str(int(AEP_COE/1E3)), str(np.round(COE_COE,2)), str(np.round(profit_COE/1E6,2)), str(int(nturbs_COE)), str(np.round(cost_COE/1E6,2)), str(np.round(spacing_COE,2)), str(np.round(wake_loss_COE*100,2))])
-    profit_arr = np.array([str(int(AEP_profit/1E3)), str(np.round(COE_profit,2)), str(np.round(profit_profit/1E6,2)), str(int(nturbs_profit)), str(np.round(cost_profit/1E6,2)), str(np.round(spacing_profit,2)), str(np.round(wake_loss_profit*100,2))])
+    AEP_arr = np.array([str(round(AEP_AEP/1E3)), str(np.round(COE_AEP,2)), str(np.round(profit_AEP/1E6,2)), str(int(nturbs_AEP)), str(np.round(cost_AEP/1E6,2)), str(np.round(spacing_AEP,2)), str(np.round(wake_loss_AEP*100,2))])
+    COE_arr = np.array([str(round(AEP_COE/1E3)), str(np.round(COE_COE,2)), str(np.round(profit_COE/1E6,2)), str(int(nturbs_COE)), str(np.round(cost_COE/1E6,2)), str(np.round(spacing_COE,2)), str(np.round(wake_loss_COE*100,2))])
+    profit_arr = np.array([str(round(AEP_profit/1E3)), str(np.round(COE_profit,2)), str(np.round(profit_profit/1E6,2)), str(int(nturbs_profit)), str(np.round(cost_profit/1E6,2)), str(np.round(spacing_profit,2)), str(np.round(wake_loss_profit*100,2))])
     print(str(np.round(COE_COE,2)))
     autolabel(rects1,AEP_arr)
     autolabel(rects2,COE_arr)
@@ -174,5 +198,5 @@ if __name__ == "__main__":
     plt.subplots_adjust(top=0.96,bottom=0.27,left=0.01,right=0.99)
     ax.set_xlim(-0.5,8.0)
 
-    plt.savefig("bars_small.pdf",transparent=True)
+    plt.savefig("bars_small2.pdf",transparent=True)
     plt.show()

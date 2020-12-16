@@ -183,15 +183,16 @@ if __name__ == "__main__":
     rotor_diameter = 117.8
 
 
-    nruns = 1
+    nruns = 50
 
 
     save = False
     plot = True
 
-    nturbs = 10
-    nturbines = [18,19]
+    # nturbs = 10
+    # nturbines = [18,19]
     # nturbines = [15,16,17,18,19,20,21,22,23,24,25]
+    nturbines = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
     niters = 25
 
     start_time = time.time()
@@ -210,7 +211,7 @@ if __name__ == "__main__":
 
         for j in range(niters):
             x0 = np.random.rand(2*nturbs)*side
-            res = minimize(AEP_obj, x0, method='SLSQP', bounds=bnds, constraints=(spacing_con),tol=1E-6,options={'disp': True})
+            res = minimize(COE_obj, x0, method='SLSQP', bounds=bnds, constraints=(spacing_con),tol=1E-6,options={'disp': False})
             if res.fun < best_solution and min(spacing_func(res.x)) >= -1E-4:
                 best_solution = res.fun
                 xf = res.x[0:nturbs]
@@ -223,6 +224,9 @@ if __name__ == "__main__":
                 print("best y: ", repr(yf))
                 print("time to run: ", run_time)
                 print("function calls: ", function_calls)
+
+    print("total time: ", time.time() - start_time)
+    print("total function calls: ", function_calls)
 
 
     
@@ -262,30 +266,30 @@ if __name__ == "__main__":
     #     print("number of turbines: ", len(xf))
 
 
-        # if save:
-        #     file = open('final_results/bg_greedy/big_AEP_AEP.txt', 'a')
-        #     file.write('%s'%(opt_val) + '\n')
-        #     file.close()
+    #     if save:
+    #         file = open('final_results/bg_greedy/big_AEP_AEP.txt', 'a')
+    #         file.write('%s'%(opt_val) + '\n')
+    #         file.close()
 
-        #     file = open('final_results/bg_greedy/big_AEP_x.txt', 'a')
-        #     file.write('%s'%(xf) + '\n')
-        #     file.close()
+    #         file = open('final_results/bg_greedy/big_AEP_x.txt', 'a')
+    #         file.write('%s'%(xf) + '\n')
+    #         file.close()
 
-        #     file = open('final_results/bg_greedy/big_AEP_y.txt', 'a')
-        #     file.write('%s'%(yf) + '\n')
-        #     file.close()
+    #         file = open('final_results/bg_greedy/big_AEP_y.txt', 'a')
+    #         file.write('%s'%(yf) + '\n')
+    #         file.close()
 
-        #     file = open('final_results/bg_greedy/big_AEP_time.txt', 'a')
-        #     file.write('%s'%(run_time) + '\n')
-        #     file.close()
+    #         file = open('final_results/bg_greedy/big_AEP_time.txt', 'a')
+    #         file.write('%s'%(run_time) + '\n')
+    #         file.close()
 
-        #     file = open('final_results/bg_greedy/big_AEP_calls.txt', 'a')
-        #     file.write('%s'%(function_calls) + '\n')
-        #     file.close()
+    #         file = open('final_results/bg_greedy/big_AEP_calls.txt', 'a')
+    #         file.write('%s'%(function_calls) + '\n')
+    #         file.close()
 
-        #     file = open('final_results/bg_greedy/big_AEP_history.txt', 'a')
-        #     file.write('%s'%(ga.solution_history) + '\n')
-        #     file.close()
+    #         file = open('final_results/bg_greedy/big_AEP_history.txt', 'a')
+    #         file.write('%s'%(ga.solution_history) + '\n')
+    #         file.close()
 
 
     if plot:

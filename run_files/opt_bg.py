@@ -288,6 +288,7 @@ def profit_obj(x):
     else:
         function_calls += 1
         floris_model.reinitialize_flow_field(layout_array=(layout_x,layout_y))
+        # AEP = floris_model.get_farm_AEP_parallel(windDirections, windSpeeds)
         AEP = floris_model.get_farm_AEP(windDirections, windSpeeds, windFrequencies, limit_ws=True)
         nturbs = len(layout_x)
 
@@ -380,7 +381,7 @@ if __name__ == "__main__":
     minSpacing = 2.0 #rotor diameters
     rotor_diameter = 117.8
 
-    nruns = 10
+    nruns = 5
 
 
     save = True
@@ -392,15 +393,13 @@ if __name__ == "__main__":
         function_calls = 0
 
         ga = GeneticAlgorithm()
-        print(ga.max_generation)
         # ga.bits = np.array([16,16,16,16,16,16,16,16,16,16,16])
         ga.bits = np.array([8,8,8,8,8,8,8,8,8,8,8])
         ga.bounds = np.array([(2.0,6.0),(2.0,6.0),(1.0,2*side),(1.0,2*side),(-np.pi,np.pi),(0.0,2.0*np.pi),(0.0,side),(0.0,side),(0.5,1.0),(0.0,side),(0,50)])
         ga.variable_type = np.array(["int","int","float","float","float","float","float","float","float","float","int"])
         ga.population_size = 100
         ga.max_generation = 1000
-        # ga.max_geneneration = 5
-        ga.objective_function = profit_obj
+        ga.objective_function = AEP_obj
         ga.crossover_rate = 0.1
         ga.mutation_rate = 0.02
         ga.convergence_iters = 25
@@ -423,7 +422,7 @@ if __name__ == "__main__":
 
         print("number of turbines: ", len(xf))
 
-        save_str = "profit"
+        save_str = "AEP"
         header_str = "small_uni"
         if save:
             file = open('final_results3/bg/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')

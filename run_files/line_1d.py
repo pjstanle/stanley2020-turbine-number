@@ -75,6 +75,7 @@ if __name__ == "__main__":
 
     plt.subplot(132)
     COE = (cost*1E6)/(AEP)
+    print("COE: ", COE)
     plt.plot(narr,COE)
     i = np.argmin(COE)
     mx = np.max(COE)

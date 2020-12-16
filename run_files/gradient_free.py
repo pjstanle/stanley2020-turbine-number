@@ -123,6 +123,7 @@ class GeneticAlgorithm():
         self.solution_history = np.zeros(self.max_generation+1)
         self.solution_history[0] = np.min(self.parent_fitness)
  
+        print("in: ", self.max_generation)
         while converged==False and ngens < self.max_generation:
             # crossover
             if crossover=="random":

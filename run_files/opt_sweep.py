@@ -291,7 +291,7 @@ if __name__ == "__main__":
 
     ppa = 30.0
 
-    best = 0.0
+    best = 10000.0
     for i in range(nruns):
         # gradient-free optimization
         start_time = time.time()
@@ -304,7 +304,7 @@ if __name__ == "__main__":
         for i in range(grid_size*grid_size):
             ga.variable_type = np.append(ga.variable_type,"int")
             ga.bounds[i] = (0,1)
-        ga.objective_function = profit_obj
+        ga.objective_function = COE_obj
 
         ga.optimize_switch(initialize="limit")
 
@@ -321,12 +321,12 @@ if __name__ == "__main__":
         xf, yf = get_turbine_locs(DVopt)    
         print("number of turbines: ", len(xf))
 
-        if -opt_val > best:
-            best = -opt_val
+        if opt_val < best:
+            best = opt_val
             best_x = xf
             best_y = yf
 
-        save_str = "profit"
+        save_str = "COE"
         header_str = "big"
         if save:
             file = open('final_results3/sweep/%s_%s_%s.txt'%(header_str,save_str,save_str), 'a')
